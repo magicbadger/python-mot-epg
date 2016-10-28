@@ -10,6 +10,6 @@ setup(name='motepg',
       url='https://github.com/GlobalRadio/python-mot-epg',
       download_url='https://github.com/GlobalRadio/python-mot-epg/tarball/1.0.0',
       keywords=['dab', 'epg'],
-      packages=['mot.epg'],
+      packages=['mot', 'mot.epg'],
       package_dir = {'' : 'src'}
      )
