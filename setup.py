@@ -7,6 +7,9 @@ setup(name='python-mot-epg',
       description='Plugin to the python-mot library to handle DAB EPG binary encoding as per ETSI TS 102 371', 
       author='Ben Poor',
       author_email='ben.poor@thisisglobal.com',
+      url='https://github.com/GlobalRadio/python-mot-epg',
+      download_url='https://github.com/GlobalRadio/python-mot-epg/tarball/1.0.0',
+      keywords=['dab', 'epg'],
       packages=['mot.epg'],
       package_dir = {'' : 'src'}
      )
