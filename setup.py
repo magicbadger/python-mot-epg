@@ -2,7 +2,7 @@
 
 from distutils.core import setup
 
-setup(name='python-mot-epg',
+setup(name='motepg',
       version='1.0.0',
       description='Plugin to the python-mot library to handle DAB EPG binary encoding as per ETSI TS 102 371', 
       author='Ben Poor',
