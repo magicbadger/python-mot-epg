@@ -52,24 +52,24 @@ class ScopeId(HeaderParameter):
 
     def __init__(self, ecc, eid, sid=None, scids=None, xpad=None):
         HeaderParameter.__init__(self, 0x27)
-        self.ecc = ecc
-        self.eid = eid
-        self.sid = sid
-        self.scids = scids
-        self.xpad = 0
+        self.__ecc = ecc
+        self.__eid = eid
+        self.__sid = sid
+        self.__scids = scids
+        self.__xpad = 0
 
     def encode_data(self):
-        if self.ecc and self.eid and not self.sid and not self.scids: # ensemble ID
-            return encode_ensembleid((self.ecc, self.eid))
+        if self.__ecc and self.__eid and not self.__sid and not self.__scids: # ensemble ID
+            return encode_ensembleid((self.__ecc, self.__eid))
         else: # DAB bearer ID
-            return encode_bearer(DabBearer(self.ecc, self.eid, self.sid, self.scids))
+            return encode_bearer(DabBearer(self.__ecc, self.__eid, self.__sid, self.__scids))
     
     def __str__(self):
         result = []
-        if (self.ecc and self.eid):
-            return "%02x.%04x" % (self.ecc, self.eid)
+        if (self.__ecc and self.__eid):
+            return "%02x.%04x" % (self.__ecc, self.__eid)
         else:
-            return "%02x.%04x.%04x.%x" % (self.ecc, self.eid, self.sid, self.scids)
+            return "%02x.%04x.%04x.%x" % (self.__ecc, self.__eid, self.__sid, self.__scids)
     
     def __repr__(self):
         return '<ScopeId: %s>' % str(self)        
@@ -78,6 +78,6 @@ class ScopeId(HeaderParameter):
     def decode_data(data):
         return ScopeId(*decode_contentid(data))
     
-HeaderParameter.decoders[0x25] = ScopeStart.decode_data
-HeaderParameter.decoders[0x26] = ScopeEnd.decode_data   
-HeaderParameter.decoders[0x27] = ScopeId.decode_data   
+register_header_parameter_decoder(0x25, ScopeStart.decode_data)
+register_header_parameter_decoder(0x26, ScopeEnd.decode_data)
+register_header_parameter_decoder(0x27, ScopeId.decode_data) 

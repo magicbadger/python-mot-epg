@@ -1,20 +1,22 @@
-import unittest
+import unittest2
 
-from msc import bitarray_to_hex
 from mot import HeaderParameter
 from mot.epg import ScopeId
 
-class ScopeIdTest(unittest.TestCase):
+class ScopeIdTest(unittest2.TestCase):
 
-    def test_si_scope(self):
+    def test_encode_si_scope(self):
         id = ScopeId(0xe1, 0xc185)
-        assert bitarray_to_hex(id.encode()) == 'E7 03 E1 C1 85'
-        HeaderParameter.from_bits(id.encode())
+
+        assert id.tobytes().hex() == 'e718e1c185'
+        #HeaderParameter.frombytes(id.tobytes())
         
     def test_pi_scope(self):
         id = ScopeId(0xe1, 0xc185, 0xc586, 0)
-        assert bitarray_to_hex(id.encode()) == 'E7 06 40 E1 C1 85 C5 86'
-        HeaderParameter.from_bits(id.encode())
+
+        assert id.tobytes().hex() == 'e73040e1c185c586'
+
+        #HeaderParameter.from_bits(id.encode())
 
 if __name__ == "__main__":
-    unittest.main()
+    unittest2.main()
